@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Assignment extends Event  {
 	
-	//Fields/ihnstance varibales(private)
+	//Fields/instance variables (private)
 	
 	private String course;
 	private Priority priority;
