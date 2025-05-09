@@ -30,6 +30,7 @@ public class Assignment extends Event  {
 		
 	}
 	
+	
 	public Priority setPriority(Priority priority)
 	{
 		return this.priority = priority;
