@@ -6,15 +6,13 @@ public class Assignment extends Event  {
 	
 	private String course;
 	private Priority priority;
-	private int progress;
 
 	
 	public Assignment(String title, String description, Date date, String course, Priority priority, int progress) {
 		super(title, description, date);
 		this.course = course;
 		this.priority = priority;
-		this.progress = progress;
-	}
+		}
 	
 	public String getCourse() 
 	{
@@ -32,18 +30,11 @@ public class Assignment extends Event  {
 		
 	}
 	
-	public Priority etPriority(Priority priority)
+	public Priority setPriority(Priority priority)
 	{
 		return this.priority = priority;
 	}
 	
-	public int getProgress()
-	{
-		return progress;
-	}
-	
-	public int setProgress()
-	{
-		return this.progress = progress;
-	}
 }
+
+//ADD A TOSTRING METHOD

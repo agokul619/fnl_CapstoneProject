@@ -1,4 +1,3 @@
-
 public enum EventStatus {
 	PENDING, 
 	IN_PROGRESS, 
