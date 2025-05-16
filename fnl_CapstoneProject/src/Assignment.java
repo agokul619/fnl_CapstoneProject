@@ -1,41 +1,52 @@
-import java.util.Date;
+/**
 
-public class Assignment extends Event  {
-	
-	//Fields/instance variables (private)
-	
-	private String course;
-	private Priority priority;
+ * Assignment.java
+ * Represents academic assignments in the scheduling system
 
-	
-	public Assignment(String title, String description, Date date, String course, Priority priority, int progress) {
-		super(title, description, date);
-		this.course = course;
-		this.priority = priority;
-		}
-	
-	public String getCourse() 
-	{
-		return course;
-	}
-	
-	public String setCourse(String course)
-	{
-		return this.course = course;
-	}
-	
-	public Priority getPriority()
-	{
-		return priority;
-		
-	}
-	
-	
-	public Priority setPriority(Priority priority)
-	{
-		return this.priority = priority;
-	}
-	
+ * This class extends the Event class to add assignment-specific
+ * properties such as:
+
+ * - Course name
+ * - Priority level
+ * - Due dates
+
+ * It implements custom notification logic based on priority levels.
+
+ */
+
+public class Assignment extends Event {
+
+    private String course;
+    private Priority priority;
+
+    
+    public Assignment(String title, String description, String course, Priority priority, NotificationService notificationService) {
+        super(title, description, notificationService);
+        this.course = course;
+        this.priority = priority;
+    }
+
+
+    public String getCourse() {
+    	return course;
+    }
+
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    } 
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public String getType() {
+        return "Assignment";
+    }
+
 }
 
-//ADD A TOSTRING METHOD
