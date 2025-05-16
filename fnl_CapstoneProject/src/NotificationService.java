@@ -1,11 +1,18 @@
-public class NotifcationService {
+public class NotificationService {
 
-    public NotifcationService() {
+    public NotificationService() {
+
+        
 
     }
 
     public void sendNotification(BasicNotification notification) {
+
+        
+
         System.out.println("NOTIFICATION: " + notification.getMessage());
+
+        
 
     }
 
