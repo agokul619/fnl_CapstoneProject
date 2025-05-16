@@ -1,13 +1,30 @@
-
 public class BasicNotification {
 
-	public BasicNotification(String message, Event event) {
-		// TODO Auto-generated constructor stub
+	private String message;
+
+	private Event source;
+
+
+	public BasicNotification(String message, Event source) {
+
+		this.message = message;
+
+		this.source = source;
+
 	}
 
+
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return message;
+
+	}
+
+
+	public Event getSource() {
+
+		return source;
+
 	}
 
 }
