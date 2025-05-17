@@ -1,201 +1,582 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.ArrayList;
+
+import java.awt.*;
+
+/**
+
+ * Beta release demonstration of the PlanIt Pro scheduling application.
+
+ * This version shows the UI layout with sample data but lacks full functions.
+
+ */
 
 public class ScheduleApp extends JFrame {
-    // Core components
-    private Schedule schedule;
-    private JTextArea displayArea;
-    
-    // Input fields
-    private JComboBox<String> typeCombo;
-    private JTextField titleField;
-    private JTextField descriptionField;
-    private JTextField locationField;
-    private JTextField attendeesField;
-    private JTextField courseField;
-    private JComboBox<String> priorityCombo;
-    
-    // Panels
-    private JPanel mainPanel;
-    private JPanel headerPanel;
-    private JPanel inputPanel;
-    private JPanel buttonPanel;
-    private JPanel assignmentPanel;
-    private JPanel meetingPanel;
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
-    
-    // Colors
-    private Color headerColor = new Color(220, 240, 250);  // Light blue
-    private Color buttonColor = new Color(100, 149, 237);  // Cornflower blue
-    
+
     /**
-     * Constructor initializes the schedule and UI components
+
+     * Constructor creates the application window
+
      */
+
     public ScheduleApp() {
-        // Initialize the schedule
-        schedule = new Schedule();
-        
-        // Set up the window
+
+        // Set up the window properties
+
         setTitle("PlanIt Pro");
-        setSize(800, 600);
+
+        setBounds(300, 300, 900, 800);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+
+        setResizable(true);
+
         
-        // Create the components
-        createGUI();
+
+        // Create the beta panel
+
+        SchedulePanel mainPanel = new SchedulePanel();
+
         
+
+        // Add the panel to the window
+
+        Container windowContainer = getContentPane();
+
+        windowContainer.add(mainPanel);
+
+        
+
         // Display window
+
         setLocationRelativeTo(null);
+
         setVisible(true);
+
     }
+
     
+
     /**
-     * Creates the main GUI components and layout
+
+     * Main method to start the application
+
      */
-    private void createGUI() {
-        // Main panel
-        mainPanel = new JPanel(new BorderLayout());
-        
-        // Create header
-        createHeaderPanel();
-        
-        // Create display area
-        displayArea = new JTextArea();
-        displayArea.setEditable(false);
-        displayArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        JScrollPane scrollPane = new JScrollPane(displayArea);
-        
-        // Create input form
-        createInputPanel();
-        
-        // Add components to main panel
-        mainPanel.add(headerPanel, BorderLayout.NORTH);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-        mainPanel.add(inputPanel, BorderLayout.SOUTH);
-        
-        // Add main panel to frame
-        add(mainPanel);
-        
-        // Show initial events
-        updateEventDisplay();
+
+    public static void main(String[] args) {
+
+        // Create and display the application
+
+        new ScheduleApp();
+
     }
 
-	private void updateEventDisplay() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void createInputPanel() {
-		 inputPanel = new JPanel();
-	        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
-	        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-	        
-	        // Create type selection and common fields
-	        JPanel commonFields = new JPanel(new GridLayout(4, 2, 10, 10));
-	        
-	        // Event type
-	        commonFields.add(new JLabel("Event Type:"));
-	        typeCombo = new JComboBox<>(new String[]{"Assignment", "Meeting"});
-	        commonFields.add(typeCombo);
-	        
-	        // Title
-	        commonFields.add(new JLabel("Title:"));
-	        titleField = new JTextField();
-	        commonFields.add(titleField);
-	        
-	        // Description
-	        commonFields.add(new JLabel("Description:"));
-	        descriptionField = new JTextField();
-	        commonFields.add(descriptionField);
-	        
-	        // Create assignment specific panel
-	        assignmentPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-	        
-	        assignmentPanel.add(new JLabel("Course:"));
-	        courseField = new JTextField();
-	        assignmentPanel.add(courseField);
-	        
-	        assignmentPanel.add(new JLabel("Priority:"));
-	        priorityCombo = new JComboBox<>(new String[]{"Low", "Medium", "High", "Urgent"});
-	        assignmentPanel.add(priorityCombo);
-	        
-	        // Create meeting specific panel
-	        meetingPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-	        
-	        meetingPanel.add(new JLabel("Location:"));
-	        locationField = new JTextField();
-	        meetingPanel.add(locationField);
-	        
-	        meetingPanel.add(new JLabel("Attendees:"));
-	        attendeesField = new JTextField();
-	        meetingPanel.add(attendeesField);
-	        
-	        // Create card layout for switching between assignment and meeting
-	        cardLayout = new CardLayout();
-	        cardPanel = new JPanel(cardLayout);
-	        cardPanel.add(assignmentPanel, "ASSIGNMENT");
-	        cardPanel.add(meetingPanel, "MEETING");
-	        
-	        // Button panel
-	        buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-	        
-	        JButton addButton = new JButton("Add Event");
-	        addButton.setBackground(new Color(0, 0, 255));
-	        addButton.setForeground(Color.WHITE);
-	        
-	        JButton viewButton = new JButton("View Events");
-	        viewButton.setBackground(new Color(255, 0, 0));
-	        viewButton.setForeground(Color.WHITE);
-	        
-	        JButton markCompleteButton = new JButton("Mark Complete");
-	        markCompleteButton.setBackground(new Color(0, 255, 0));
-	        markCompleteButton.setForeground(Color.WHITE);
-	        
-	      
-	        // Add buttons to panel
-	        buttonPanel.add(addButton);
-	        buttonPanel.add(viewButton);
-	        buttonPanel.add(markCompleteButton);
-	        
-	        // Add type selection listener
-	        typeCombo.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                String selectedType = (String) typeCombo.getSelectedItem();
-	                if ("Assignment".equals(selectedType)) {
-	                    cardLayout.show(cardPanel, "ASSIGNMENT");
-	                } else {
-	                    cardLayout.show(cardPanel, "MEETING");
-	                }
-	            }
-	        });
-	        
-	        // Add all components to input panel
-	        inputPanel.add(commonFields);
-	        inputPanel.add(cardPanel);
-	        inputPanel.add(buttonPanel);
-	    }
-		
-	
-	private void createHeaderPanel() {
-	    headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(headerColor);
-        headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        // Create app title
-        JLabel titleLabel = new JLabel("PlanIt Pro", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
-        titleLabel.setForeground(new Color(60, 60, 60));
-		
-	}
-	
-
-
-public static void main(String[] args) {
-    new ScheduleApp();
-}
-}
-  
     
+
+    /**
+
+     *  panel with demonstration content
+
+     */
+
+    class SchedulePanel extends JPanel {
+
+        // Colors
+
+        private Color appColor = new Color(230, 240, 250);  // Light blue
+
+        
+
+        /**
+
+         * Constructor creates the simple beta UI
+
+         */
+
+        public SchedulePanel() {
+
+            setBackground(appColor);
+
+            setLayout(new BorderLayout(10, 10));
+
+            setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+            
+
+            // Add the header, display area, and input form
+
+            add(createHeaderPanel(), BorderLayout.NORTH);
+
+            add(createDisplayPanel(), BorderLayout.CENTER);
+
+            add(createInputPanel(), BorderLayout.SOUTH);
+
+        }
+
+        
+
+        /**
+
+         * Creates the header panel with title and slogan
+
+         */
+
+        private JPanel createHeaderPanel() {
+
+            JPanel panel = new JPanel(new BorderLayout());
+
+            panel.setBackground(appColor);
+
+            panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+
+            
+
+            // App title
+
+            JLabel titleLabel = new JLabel("PlanIt Pro", JLabel.CENTER);
+
+            titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
+
+            titleLabel.setForeground(new Color(40, 40, 100));
+
+            
+
+            // Slogan
+
+            JLabel sloganLabel = new JLabel("Plan smarter, achieve more", JLabel.CENTER);
+
+            sloganLabel.setFont(new Font("SansSerif", Font.ITALIC, 22));
+
+            sloganLabel.setForeground(new Color(60, 60, 120));
+
+            
+
+            // Color key panel
+
+            JPanel keyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+            keyPanel.setBackground(appColor);
+
+            
+
+            JLabel meetingKey = new JLabel("Meeting");
+
+            JPanel meetingColor = new JPanel();
+
+            meetingColor.setBackground(Color.BLUE);
+
+            meetingColor.setPreferredSize(new Dimension(15, 15));
+
+            
+
+            JLabel assignmentKey = new JLabel("Assignment");
+
+            JPanel assignmentColor = new JPanel();
+
+            assignmentColor.setBackground(Color.RED);
+
+            assignmentColor.setPreferredSize(new Dimension(15, 15));
+
+            
+
+            keyPanel.add(meetingColor);
+
+            keyPanel.add(meetingKey);
+
+            keyPanel.add(Box.createHorizontalStrut(20));
+
+            keyPanel.add(assignmentColor);
+
+            keyPanel.add(assignmentKey);
+
+            
+
+            // App title with logo
+
+            JPanel titleWithLogoPanel = new JPanel(new BorderLayout());
+
+            titleWithLogoPanel.setBackground(appColor);
+
+            
+
+            // Create logo panel
+
+            JPanel logoPanel = new JPanel() {
+
+                @Override
+
+                protected void paintComponent(Graphics g) {
+
+                    super.paintComponent(g);
+
+                    
+
+                    // Draw a cute calendar/planner logo
+
+                    int width = 80;
+
+                    int height = 80;
+
+                    
+
+                    // Calendar outline
+
+                    g.setColor(new Color(30, 50, 120));
+
+                    g.fillRoundRect(10, 5, width, height, 10, 10);
+
+                    
+
+                    // Inner calendar background
+
+                    g.setColor(new Color(240, 240, 250));
+
+                    g.fillRoundRect(15, 25, width-10, height-30, 5, 5);
+
+                    
+
+                    // Calendar binding/top
+
+                    g.setColor(new Color(180, 30, 30));
+
+                    g.fillRect(15, 10, width-10, 15);
+
+                    
+
+                    // Calendar hangers
+
+                    g.setColor(new Color(220, 220, 220));
+
+                    g.fillRect(30, 2, 5, 8);
+
+                    g.fillRect(65, 2, 5, 8);
+
+                    
+
+                    // Lines in the calendar
+
+                    g.setColor(new Color(180, 180, 200));
+
+                    g.drawLine(15, 45, width+5, 45);
+
+                    g.drawLine(15, 65, width+5, 65);
+
+                    
+
+                    // Check mark on one item
+
+                    g.setColor(new Color(30, 150, 30));
+
+                    g.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+                    g.drawString("✓", 22, 60);
+
+                    
+
+                    // Pen/pencil
+
+                    g.setColor(new Color(60, 60, 180));
+
+                    g.fillRect(width+15, 30, 6, 40);
+
+                    
+
+                    // Pencil tip
+
+                    g.setColor(new Color(40, 40, 40));
+
+                    int[] xPoints = {width+15, width+18, width+21};
+
+                    int[] yPoints = {70, 78, 70};
+
+                    g.fillPolygon(xPoints, yPoints, 3);
+
+                }
+
+                
+
+                @Override
+
+                public Dimension getPreferredSize() {
+
+                    return new Dimension(120, 90);
+
+                }
+
+            };
+
+            
+
+            // Add the logo and title to the panel
+
+            titleWithLogoPanel.add(logoPanel, BorderLayout.WEST);
+
+            titleWithLogoPanel.add(titleLabel, BorderLayout.CENTER);
+
+            
+
+            // Build the header
+
+            JPanel titlePanel = new JPanel(new BorderLayout());
+
+            titlePanel.setBackground(appColor);
+
+            titlePanel.add(titleWithLogoPanel, BorderLayout.CENTER);
+
+            titlePanel.add(sloganLabel, BorderLayout.SOUTH);
+
+            
+
+            panel.add(titlePanel, BorderLayout.CENTER);
+
+            panel.add(keyPanel, BorderLayout.SOUTH);
+
+            
+
+            return panel;
+
+        }
+
+        
+
+        /**
+
+         * Creates a display panel with sample data
+
+         */
+
+        private JPanel createDisplayPanel() {
+
+            JPanel panel = new JPanel(new BorderLayout());
+
+            panel.setBackground(appColor);
+
+            panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+            
+
+            // Create the display area with sample data
+
+            JTextArea displayArea = new JTextArea(20, 60);
+
+            displayArea.setEditable(false);
+
+            displayArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
+
+            displayArea.setLineWrap(true);
+
+            displayArea.setWrapStyleWord(true);
+
+            
+
+            // Add sample data
+
+            displayArea.append("ID: 1\n");
+
+            displayArea.append("Title: Math Homework\n");
+
+            displayArea.append("Description: Complete exercises 3-15 on page 42\n");
+
+            displayArea.append("Type: Assignment\n");
+
+            displayArea.append("Course: Mathematics 101\n");
+
+            displayArea.append("Priority: High\n");
+
+            displayArea.append("Status: Pending\n");
+
+            displayArea.append("-----------------\n\n");
+
+            
+
+            displayArea.append("✅ COMPLETED\n");
+
+            displayArea.append("ID: 2\n");
+
+            displayArea.append("Title: Team Project Meeting\n");
+
+            displayArea.append("Description: Discuss project timeline and tasks\n");
+
+            displayArea.append("Type: Meeting\n");
+
+            displayArea.append("Location: Conference Room B\n");
+
+            displayArea.append("Attendees: John, Sarah, Michael, Emma\n");
+
+            displayArea.append("-----------------\n\n");
+
+            
+
+            displayArea.append("ID: 3\n");
+
+            displayArea.append("Title: Research Paper\n");
+
+            displayArea.append("Description: Write 5-page paper on renewable energy\n");
+
+            displayArea.append("Type: Assignment\n");
+
+            displayArea.append("Course: Environmental Science\n");
+
+            displayArea.append("Priority: Urgent\n");
+
+            displayArea.append("Status: Pending\n");
+
+            displayArea.append("-----------------\n\n");
+
+            
+
+            // Add it to a scroll pane
+
+            JScrollPane scrollPane = new JScrollPane(displayArea);
+
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            scrollPane.setMinimumSize(new Dimension(600, 400));
+
+            scrollPane.setPreferredSize(new Dimension(800, 450));
+
+            
+
+            panel.add(scrollPane, BorderLayout.CENTER);
+
+            
+
+            // Add a "Beta Version" label
+
+           
+
+            
+
+            return panel;
+
+        }
+
+        
+
+        /**
+
+         * Creates a simplified input form (non-functional for beta)
+
+         */
+
+        private JPanel createInputPanel() {
+
+            JPanel panel = new JPanel(new BorderLayout(0, 10));
+
+            panel.setBackground(appColor);
+
+            panel.setBorder(BorderFactory.createCompoundBorder(
+
+                BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY),
+
+                BorderFactory.createEmptyBorder(10, 0, 0, 0)
+
+            ));
+
+            
+
+            // Simplified form fields
+
+            JPanel formPanel = new JPanel(new GridLayout(3, 4, 10, 10));
+
+            formPanel.setBackground(appColor);
+
+            
+
+            // Add dummy fields
+
+            formPanel.add(new JLabel("Event Type:"));
+
+            formPanel.add(new JComboBox<>(new String[]{"Assignment", "Meeting"}));
+
+            
+
+            formPanel.add(new JLabel("Title:"));
+
+            formPanel.add(new JTextField());
+
+            
+
+            formPanel.add(new JLabel("Description:"));
+
+            formPanel.add(new JTextField());
+
+            
+
+            formPanel.add(new JLabel("Course:"));
+
+            formPanel.add(new JTextField());
+
+            
+
+            formPanel.add(new JLabel("Priority:"));
+
+            formPanel.add(new JComboBox<>(new String[]{"Low", "Medium", "High", "Urgent"}));
+
+            
+
+            // Add blank cells for spacing
+
+            formPanel.add(new JLabel(""));
+
+            formPanel.add(new JLabel(""));
+
+            
+
+            // Button panel
+
+            JPanel buttonPanel = new JPanel();
+
+            buttonPanel.setBackground(appColor);
+
+            
+
+            JButton addButton = new JButton("Add Event");
+
+            addButton.setBackground(new Color(100, 149, 237));
+
+            addButton.setForeground(Color.BLUE);
+
+            addButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+            
+
+            JButton viewButton = new JButton("View Events");
+
+            viewButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+            viewButton.setForeground(Color.RED);
+
+            
+
+            JButton markCompleteButton = new JButton("Mark Complete");
+
+            markCompleteButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+            markCompleteButton.setForeground(Color.GREEN);
+
+            
+
+            // Add buttons to panel
+
+            buttonPanel.add(addButton);
+
+            buttonPanel.add(viewButton);
+
+            buttonPanel.add(markCompleteButton);
+
+            
+
+            // Add form and buttons to the panel
+
+            panel.add(formPanel, BorderLayout.CENTER);
+
+            panel.add(buttonPanel, BorderLayout.SOUTH);
+
+            
+
+            return panel;
+
+        }
+
+    }
+}

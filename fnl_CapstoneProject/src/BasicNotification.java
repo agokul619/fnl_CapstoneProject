@@ -1,30 +1,33 @@
 public class BasicNotification {
 
-	private String message;
+    private String message;
 
-	private Event source;
+    private Event source;
 
+    
 
-	public BasicNotification(String message, Event source) {
+    public BasicNotification(String message, Event source) {
 
-		this.message = message;
+        this.message = message;
 
-		this.source = source;
+        this.source = source;
 
-	}
+    }
 
+    
 
-	public String getMessage() {
+    public String getMessage() {
 
-		return message;
+        return message;
 
-	}
+    }
 
+    
 
-	public Event getSource() {
+    public Event getSource() {
 
-		return source;
+        return source;
 
-	}
+    }
 
 }
