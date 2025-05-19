@@ -56,20 +56,19 @@ public class Schedule {
 		}
 	}
 
-//	private Color getPriorityCircleColor (Priority priority) {
-//		return switch (priority) {
-//			case 1: HIGH;
-//		result = Color.red;
-//		break;
-//			case 1: HIGH;
-//			result = Color.red;
-//			break;case 1: HIGH;
-//			result = Color.red;
-//			break;
-//			case 2: MEDIUM Color.YELLOW;
-//		case LOW Color.GREEN;
-//		} //; why is the semi colon considered java 14?? oh the arrow is not allowed
-//	}
+	//	private Color getPriorityColor(Priority priority); {
+	//		switch(priority) {
+	// 		case URGENT:
+	// 			return Color.RED;
+	//		case HIGH:
+	//			return Color.ORANGE;
+	//		case MEDIUM:
+	//			return Color.YEllOW;
+	//		case LOW:
+	//			return Color.GREEN;
+	//	can the cases use the enum constants? 
+	// are these parameters right considering Priority is also the class name?
+
 
 
 
