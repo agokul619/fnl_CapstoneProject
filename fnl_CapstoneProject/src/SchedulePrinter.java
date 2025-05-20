@@ -37,7 +37,7 @@ public class SchedulePrinter {
             if (answer == 1) {
                 eventCount++;
 
-                // Get event type with validation
+                // Ask for type until valid input
                 String type = "Unknown";
                 int typeChoice = 0;
                 while (typeChoice != 1 && typeChoice != 2) {
@@ -55,7 +55,7 @@ public class SchedulePrinter {
                     }
                 }
 
-                // Get priority with validation
+                // Ask for priority until valid
                 String priority = "Unknown";
                 int priorityInput = 0;
                 while (priorityInput < 1 || priorityInput > 4) {
@@ -80,7 +80,7 @@ public class SchedulePrinter {
                     }
                 }
 
-                // Get text info
+                // Get title, description, course
                 System.out.println("Enter title: ");
                 String title = kboard.nextLine();
 
@@ -90,7 +90,7 @@ public class SchedulePrinter {
                 System.out.println("Enter course: ");
                 String course = kboard.nextLine();
 
-                // Print summary
+                // Print everything back to user
                 System.out.println();
                 System.out.println("Event Summary");
                 System.out.println("ID: " + eventCount);
