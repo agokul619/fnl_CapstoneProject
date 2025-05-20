@@ -20,23 +20,116 @@ public class SchedulePrinter {
 	 * serves as user interaction/interface instead of a window with drop down menus
 	 * overall: probable action -> deleting graphics.
 	 */
+
 	public static void main(String[] args) {
-		int x, y;
-		Scanner kboard;
-		kboard = new Scanner(System.in);
 
-		System.out.println("Would you like to add an event?");
-		System.out.println("Enter a number: 1 for yes, 2 for no");
-		x = kboard.nextInt();
-		System.out.println("What is the event description");
-		System.out.println("Would you like to add an event?");
-		System.out.println("Would you like to add an event?");
-		System.out.println("Would you like to add an event?");
-		System.out.println("Would you like to add an event?");
-		System.out.println("Would you like to add an event?");
-		System.out.println("Would you like to add an event?");
+        Scanner kboard = new Scanner(System.in);
+        int eventCount = 0;
 
+        while (true) {
+            System.out.println("Would you like to add an event");
+            System.out.println("Type 1 for yes");
+            System.out.println("Type 2 for no");
 
+            int answer = kboard.nextInt();
+            kboard.nextLine(); // move to next line
+
+            if (answer == 1) {
+                eventCount++;
+
+                // Get event type with validation
+                String type = "Unknown";
+                int typeChoice = 0;
+                while (typeChoice != 1 && typeChoice != 2) {
+                    System.out.println("Enter the event type");
+                    System.out.println("Type 1 for Assignment");
+                    System.out.println("Type 2 for Meeting");
+                    typeChoice = kboard.nextInt();
+                    kboard.nextLine();
+                    if (typeChoice == 1) {
+                        type = "Assignment";
+                    } else if (typeChoice == 2) {
+                        type = "Meeting";
+                    } else {
+                        System.out.println("Invalid input. Please try again.");
+                    }
+                }
+
+                // Get priority with validation
+                String priority = "Unknown";
+                int priorityInput = 0;
+                while (priorityInput < 1 || priorityInput > 4) {
+                    System.out.println("Choose priority");
+                    System.out.println("Type 1 for Low");
+                    System.out.println("Type 2 for Medium");
+                    System.out.println("Type 3 for High");
+                    System.out.println("Type 4 for Urgent");
+                    priorityInput = kboard.nextInt();
+                    kboard.nextLine();
+
+                    if (priorityInput == 1) {
+                        priority = "Low";
+                    } else if (priorityInput == 2) {
+                        priority = "Medium";
+                    } else if (priorityInput == 3) {
+                        priority = "High";
+                    } else if (priorityInput == 4) {
+                        priority = "Urgent";
+                    } else {
+                        System.out.println("Invalid input. Please try again.");
+                    }
+                }
+
+                // Get text info
+                System.out.println("Enter title: ");
+                String title = kboard.nextLine();
+
+                System.out.println("Enter description: ");
+                String description = kboard.nextLine();
+
+                System.out.println("Enter course: ");
+                String course = kboard.nextLine();
+
+                // Print summary
+                System.out.println();
+                System.out.println("Event Summary");
+                System.out.println("ID: " + eventCount);
+                System.out.println("Title: " + title);
+                System.out.println("Description: " + description);
+                System.out.println("Type: " + type);
+                System.out.println("Course: " + course);
+                System.out.println("Priority: " + priority);
+                System.out.println("Status Pending");
+                System.out.println("----------");
+                System.out.println();
+
+            } else if (answer == 2) {
+                System.out.println("Exiting");
+                break;
+            } else {
+                System.out.println("Invalid input. Please try again.");
+            }
+        }
+
+        kboard.close();
+    }
+		
+//		int x, y;
+//		Scanner kboard;
+//		kboard = new Scanner(System.in);
+//
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Enter a number: 1 for yes, 2 for no");
+//		x = kboard.nextInt();
+//		System.out.println("What is the event description");
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Would you like to add an event?");
+//		System.out.println("Would you like to add an event?");
+//
+//
 
 
 		//		System.out.println("ID: 1\n");
@@ -91,4 +184,4 @@ public class SchedulePrinter {
 		//
 		//		System.out.println("-----------------\n\n");
 	}
-}
+
