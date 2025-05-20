@@ -58,6 +58,8 @@ public class SchedulePrinter {
                 // Ask for priority until valid
                 String priority = "Unknown";
                 int priorityInput = 0;
+             
+                
                 while (priorityInput < 1 || priorityInput > 4) {
                     System.out.println("Choose priority");
                     System.out.println("Type 1 for Low");
