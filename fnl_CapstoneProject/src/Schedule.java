@@ -17,60 +17,25 @@
  * - progress bar: automatic! should be .gif if worst comes to worst or moving GUI bar
  * - similar to .jar from previous assignment/test, but instead of 100% done ( w/ running program)
  * - progress bar can increase as the array list/ events are checked off
- * ----- checking off events! will be coded from above segment w/ clickable circles!
+ * - checking off events! will be coded from above segment w/ clickable circles!
  * - required: mouseListener, another class: ProgressBar/TaskTracker?, 
- * - 
+ * 
+ * 
+ * 5/19 schoolnight update: NOT doing the above GUI creative anymore
+ * will comment another class of just console output, no GUI even needed.. 
+ * may add switch cases due to sheer amount of buttons/questions asked
  */
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.List;
 import java.util.ArrayList;
 
 public class Schedule {
 	private ArrayList<Event> events; //event list 
 	private NotificationService notificationService;
-	private JPanel canvas;
 
 	public Schedule() {
 		events = new ArrayList<>();
 		notificationService = new NotificationService();
 
-
-		canvas = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) //protected (basically private but inherited classes can access)
-			{
-				// Draw circles for each task, color-coded by priority 
-				//(HIGH MEDIUM LOW) - RED YELLOW GREEN.... not coded by color yet
-			}
-		};
-		canvas.addMouseListener(new CircleClickListener()); //canvas object calling mouselistener (tracking mouse)
-		// JFrame setup: title, size, exit behavior, etc
 	}
-
-	class CircleClickListener extends MouseAdapter { //wait is this nested, should we delete? messy
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// determine if click was inside a circle -> handle task
-		}
-	}
-
-	//	private Color getPriorityColor(Priority priority); {
-	//		switch(priority) {
-	// 		case URGENT:
-	// 			return Color.RED;
-	//		case HIGH:
-	//			return Color.ORANGE;
-	//		case MEDIUM:
-	//			return Color.YEllOW;
-	//		case LOW:
-	//			return Color.GREEN;
-	//	can the cases use the enum constants? 
-	// are these parameters right considering Priority is also the class name?
-
-
-
 
 	public void addEvent(Event event) {
 		if (event != null) {
@@ -89,9 +54,10 @@ public class Schedule {
 	}
 
 	public Event getEventById(int id) {
-		for (Event event : events) {
-			if (event.getId() == id) {
-				return event;
+		for(int eventID = 0; eventID < events.size(); eventID++) { // iterating going through the array List
+			Event currentEvent = events.get(eventID); // grabbing the event in the list to compare its ID 
+			if (currentEvent.getId() == id) { // taking the current Event, getting it's position in the list (ID), comparing it to the for loop (ID)
+				return currentEvent; //return the event when a match, if not match, eventID ++ until it is.
 			}
 		}
 		return null;
