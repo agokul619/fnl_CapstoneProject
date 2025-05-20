@@ -19,6 +19,11 @@ public class SchedulePrinter {
 	 * restart due to issues with GUI, multiple panels despite rubric (1 panel, 1 window)
 	 * serves as user interaction/interface instead of a window with drop down menus
 	 * overall: probable action -> deleting graphics.
+	 * 
+	 * NOTES: gabby 5/20 -> may do switch cases, 
+	 * trying to figure out how to encorporate classes bc rn not relevant
+	 * creating class instances and calling the methods from those objects?
+	 * invoking methods instead of just doing print statements
 	 */
 
 	public static void main(String[] args) {
