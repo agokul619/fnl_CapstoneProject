@@ -96,6 +96,15 @@ public class SchedulePrinter {
 
                 System.out.println("Enter course: ");
                 String course = kboard.nextLine();
+                
+//                if(type.equals("assignment"))
+//                {
+//                	Assignment a = new Assignment (title,description, course, priority, notificationService);
+//                }
+//                else if(type.equals("meeting"))
+//                {
+//                	
+//                }
 
                 // Print everything back to user
                 System.out.println();
