@@ -1,582 +1,309 @@
-//import javax.swing.*;
-//
-//import java.awt.*;
-//
-///**
-//
-// * Beta release demonstration of the PlanIt Pro scheduling application.
-//
-// * This version shows the UI layout with sample data but lacks full functions.
-//
-// */
-//
-//public class ScheduleApp extends JFrame {
-//
-//    /**
-//
-//     * Constructor creates the application window
-//
-//     */
-//
-//    public ScheduleApp() {
-//
-//        // Set up the window properties
-//
-//        setTitle("PlanIt Pro");
-//
-//        setBounds(300, 300, 900, 800);
-//
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        setResizable(true);
-//
-//        
-//
-//        // Create the beta panel
-//
-//        SchedulePanel mainPanel = new SchedulePanel();
-//
-//        
-//
-//        // Add the panel to the window
-//
-//        Container windowContainer = getContentPane();
-//
-//        windowContainer.add(mainPanel);
-//
-//        
-//
-//        // Display window
-//
-//        setLocationRelativeTo(null);
-//
-//        setVisible(true);
-//
-//    }
-//
-//    
-//
-//    /**
-//
-//     * Main method to start the application
-//
-//     */
-//
-//    public static void main(String[] args) {
-//
-//        // Create and display the application
-//
-//        new ScheduleApp();
-//
-//    }
-//
-//    
-//
-//    /**
-//
-//     *  panel with demonstration content
-//
-//     */
-//
-//    class SchedulePanel extends JPanel {
-//
-//        // Colors
-//
-//        private Color appColor = new Color(230, 240, 250);  // Light blue
-//
-//        
-//
-//        /**
-//
-//         * Constructor creates the simple beta UI
-//
-//         */
-//
-//        public SchedulePanel() {
-//
-//            setBackground(appColor);
-//
-//            setLayout(new BorderLayout(10, 10));
-//
-//            setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-//
-//            
-//
-//            // Add the header, display area, and input form
-//
-//            add(createHeaderPanel(), BorderLayout.NORTH);
-//
-//            add(createDisplayPanel(), BorderLayout.CENTER);
-//
-//            add(createInputPanel(), BorderLayout.SOUTH);
-//
-//        }
-//
-//        
-//
-//        /**
-//
-//         * Creates the header panel with title and slogan
-//
-//         */
-//
-//        private JPanel createHeaderPanel() {
-//
-//            JPanel panel = new JPanel(new BorderLayout());
-//
-//            panel.setBackground(appColor);
-//
-//            panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-//
-//            
-//
-//            // App title
-//
-//            JLabel titleLabel = new JLabel("PlanIt Pro", JLabel.CENTER);
-//
-//            titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
-//
-//            titleLabel.setForeground(new Color(40, 40, 100));
-//
-//            
-//
-//            // Slogan
-//
-//            JLabel sloganLabel = new JLabel("Plan smarter, achieve more", JLabel.CENTER);
-//
-//            sloganLabel.setFont(new Font("SansSerif", Font.ITALIC, 22));
-//
-//            sloganLabel.setForeground(new Color(60, 60, 120));
-//
-//            
-//
-//            // Color key panel
-//
-//            JPanel keyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//
-//            keyPanel.setBackground(appColor);
-//
-//            
-//
-//            JLabel meetingKey = new JLabel("Meeting");
-//
-//            JPanel meetingColor = new JPanel();
-//
-//            meetingColor.setBackground(Color.BLUE);
-//
-//            meetingColor.setPreferredSize(new Dimension(15, 15));
-//
-//            
-//
-//            JLabel assignmentKey = new JLabel("Assignment");
-//
-//            JPanel assignmentColor = new JPanel();
-//
-//            assignmentColor.setBackground(Color.RED);
-//
-//            assignmentColor.setPreferredSize(new Dimension(15, 15));
-//
-//            
-//
-//            keyPanel.add(meetingColor);
-//
-//            keyPanel.add(meetingKey);
-//
-//            keyPanel.add(Box.createHorizontalStrut(20));
-//
-//            keyPanel.add(assignmentColor);
-//
-//            keyPanel.add(assignmentKey);
-//
-//            
-//
-//            // App title with logo
-//
-//            JPanel titleWithLogoPanel = new JPanel(new BorderLayout());
-//
-//            titleWithLogoPanel.setBackground(appColor);
-//
-//            
-//
-//            // Create logo panel
-//
-//            JPanel logoPanel = new JPanel() {
-//
-//                @Override
-//
-//                protected void paintComponent(Graphics g) {
-//
-//                    super.paintComponent(g);
-//
-//                    
-//
-//                    // Draw a cute calendar/planner logo
-//
-//                    int width = 80;
-//
-//                    int height = 80;
-//
-//                    
-//
-//                    // Calendar outline
-//
-//                    g.setColor(new Color(30, 50, 120));
-//
-//                    g.fillRoundRect(10, 5, width, height, 10, 10);
-//
-//                    
-//
-//                    // Inner calendar background
-//
-//                    g.setColor(new Color(240, 240, 250));
-//
-//                    g.fillRoundRect(15, 25, width-10, height-30, 5, 5);
-//
-//                    
-//
-//                    // Calendar binding/top
-//
-//                    g.setColor(new Color(180, 30, 30));
-//
-//                    g.fillRect(15, 10, width-10, 15);
-//
-//                    
-//
-//                    // Calendar hangers
-//
-//                    g.setColor(new Color(220, 220, 220));
-//
-//                    g.fillRect(30, 2, 5, 8);
-//
-//                    g.fillRect(65, 2, 5, 8);
-//
-//                    
-//
-//                    // Lines in the calendar
-//
-//                    g.setColor(new Color(180, 180, 200));
-//
-//                    g.drawLine(15, 45, width+5, 45);
-//
-//                    g.drawLine(15, 65, width+5, 65);
-//
-//                    
-//
-//                    // Check mark on one item
-//
-//                    g.setColor(new Color(30, 150, 30));
-//
-//                    g.setFont(new Font("SansSerif", Font.BOLD, 14));
-//
-//                    g.drawString("✓", 22, 60);
-//
-//                    
-//
-//                    // Pen/pencil
-//
-//                    g.setColor(new Color(60, 60, 180));
-//
-//                    g.fillRect(width+15, 30, 6, 40);
-//
-//                    
-//
-//                    // Pencil tip
-//
-//                    g.setColor(new Color(40, 40, 40));
-//
-//                    int[] xPoints = {width+15, width+18, width+21};
-//
-//                    int[] yPoints = {70, 78, 70};
-//
-//                    g.fillPolygon(xPoints, yPoints, 3);
-//
-//                }
-//
-//                
-//
-//                @Override
-//
-//                public Dimension getPreferredSize() {
-//
-//                    return new Dimension(120, 90);
-//
-//                }
-//
-//            };
-//
-//            
-//
-//            // Add the logo and title to the panel
-//
-//            titleWithLogoPanel.add(logoPanel, BorderLayout.WEST);
-//
-//            titleWithLogoPanel.add(titleLabel, BorderLayout.CENTER);
-//
-//            
-//
-//            // Build the header
-//
-//            JPanel titlePanel = new JPanel(new BorderLayout());
-//
-//            titlePanel.setBackground(appColor);
-//
-//            titlePanel.add(titleWithLogoPanel, BorderLayout.CENTER);
-//
-//            titlePanel.add(sloganLabel, BorderLayout.SOUTH);
-//
-//            
-//
-//            panel.add(titlePanel, BorderLayout.CENTER);
-//
-//            panel.add(keyPanel, BorderLayout.SOUTH);
-//
-//            
-//
-//            return panel;
-//
-//        }
-//
-//        
-//
-//        /**
-//
-//         * Creates a display panel with sample data
-//
-//         */
-//
-//        private JPanel createDisplayPanel() {
-//
-//            JPanel panel = new JPanel(new BorderLayout());
-//
-//            panel.setBackground(appColor);
-//
-//            panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-//
-//            
-//
-//            // Create the display area with sample data
-//
-//            JTextArea displayArea = new JTextArea(20, 60);
-//
-//            displayArea.setEditable(false);
-//
-//            displayArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
-//
-//            displayArea.setLineWrap(true);
-//
-//            displayArea.setWrapStyleWord(true);
-//
-//            
-//
-//            // Add sample data
-//
-//            displayArea.append("ID: 1\n");
-//
-//            displayArea.append("Title: Math Homework\n");
-//
-//            displayArea.append("Description: Complete exercises 3-15 on page 42\n");
-//
-//            displayArea.append("Type: Assignment\n");
-//
-//            displayArea.append("Course: Mathematics 101\n");
-//
-//            displayArea.append("Priority: High\n");
-//
-//            displayArea.append("Status: Pending\n");
-//
-//            displayArea.append("-----------------\n\n");
-//
-//            
-//
-//            displayArea.append("✅ COMPLETED\n");
-//
-//            displayArea.append("ID: 2\n");
-//
-//            displayArea.append("Title: Team Project Meeting\n");
-//
-//            displayArea.append("Description: Discuss project timeline and tasks\n");
-//
-//            displayArea.append("Type: Meeting\n");
-//
-//            displayArea.append("Location: Conference Room B\n");
-//
-//            displayArea.append("Attendees: John, Sarah, Michael, Emma\n");
-//
-//            displayArea.append("-----------------\n\n");
-//
-//            
-//
-//            displayArea.append("ID: 3\n");
-//
-//            displayArea.append("Title: Research Paper\n");
-//
-//            displayArea.append("Description: Write 5-page paper on renewable energy\n");
-//
-//            displayArea.append("Type: Assignment\n");
-//
-//            displayArea.append("Course: Environmental Science\n");
-//
-//            displayArea.append("Priority: Urgent\n");
-//
-//            displayArea.append("Status: Pending\n");
-//
-//            displayArea.append("-----------------\n\n");
-//
-//            
-//
-//            // Add it to a scroll pane
-//
-//            JScrollPane scrollPane = new JScrollPane(displayArea);
-//
-//            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//
-//            scrollPane.setMinimumSize(new Dimension(600, 400));
-//
-//            scrollPane.setPreferredSize(new Dimension(800, 450));
-//
-//            
-//
-//            panel.add(scrollPane, BorderLayout.CENTER);
-//
-//            
-//
-//            // Add a "Beta Version" label
-//
-//           
-//
-//            
-//
-//            return panel;
-//
-//        }
-//
-//        
-//
-//        /**
-//
-//         * Creates a simplified input form (non-functional for beta)
-//
-//         */
-//
-//        private JPanel createInputPanel() {
-//
-//            JPanel panel = new JPanel(new BorderLayout(0, 10));
-//
-//            panel.setBackground(appColor);
-//
-//            panel.setBorder(BorderFactory.createCompoundBorder(
-//
-//                BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY),
-//
-//                BorderFactory.createEmptyBorder(10, 0, 0, 0)
-//
-//            ));
-//
-//            
-//
-//            // Simplified form fields
-//
-//            JPanel formPanel = new JPanel(new GridLayout(3, 4, 10, 10));
-//
-//            formPanel.setBackground(appColor);
-//
-//            
-//
-//            // Add dummy fields
-//
-//            formPanel.add(new JLabel("Event Type:"));
-//
-//            formPanel.add(new JComboBox<>(new String[]{"Assignment", "Meeting"}));
-//
-//            
-//
-//            formPanel.add(new JLabel("Title:"));
-//
-//            formPanel.add(new JTextField());
-//
-//            
-//
-//            formPanel.add(new JLabel("Description:"));
-//
-//            formPanel.add(new JTextField());
-//
-//            
-//
-//            formPanel.add(new JLabel("Course:"));
-//
-//            formPanel.add(new JTextField());
-//
-//            
-//
-//            formPanel.add(new JLabel("Priority:"));
-//
-//            formPanel.add(new JComboBox<>(new String[]{"Low", "Medium", "High", "Urgent"}));
-//
-//            
-//
-//            // Add blank cells for spacing
-//
-//            formPanel.add(new JLabel(""));
-//
-//            formPanel.add(new JLabel(""));
-//
-//            
-//
-//            // Button panel
-//
-//            JPanel buttonPanel = new JPanel();
-//
-//            buttonPanel.setBackground(appColor);
-//
-//            
-//
-//            JButton addButton = new JButton("Add Event");
-//
-//            addButton.setBackground(new Color(100, 149, 237));
-//
-//            addButton.setForeground(Color.BLUE);
-//
-//            addButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-//
-//            
-//
-//            JButton viewButton = new JButton("View Events");
-//
-//            viewButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-//
-//            viewButton.setForeground(Color.RED);
-//
-//            
-//
-//            JButton markCompleteButton = new JButton("Mark Complete");
-//
-//            markCompleteButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-//
-//            markCompleteButton.setForeground(Color.GREEN);
-//
-//            
-//
-//            // Add buttons to panel
-//
-//            buttonPanel.add(addButton);
-//
-//            buttonPanel.add(viewButton);
-//
-//            buttonPanel.add(markCompleteButton);
-//
-//            
-//
-//            // Add form and buttons to the panel
-//
-//            panel.add(formPanel, BorderLayout.CENTER);
-//
-//            panel.add(buttonPanel, BorderLayout.SOUTH);
-//
-//            
-//
-//            return panel;
-//
-//        }
-//
-//    }
-//}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+/*
+ * ScheduleApp.java 
+ * 
+ * Our attempt at a basic PlanIt Pro app with just enough
+ * GUI to be usable without getting too complex.
+ * Still needs some work but gets the job done!
+ */
+
+//Authors: Ishanvi Deodhar, Aditi Gokul, Gabby Moll
+//Rev date: 5/23/25
+
+
+public class ScheduleApp extends JFrame {
+    // Main stuff we need
+    private Schedule mySchedule; 
+    private JTextArea eventList; 
+    
+    // Form controls
+    private JComboBox<String> eventType;
+    private JTextField nameBox;
+    private JTextField detailsBox;
+    private JTextField courseLocBox; 
+    private JTextField peopleBox;
+    private JComboBox<String> importanceBox;
+    
+    // Constructor - sets up our window
+    public ScheduleApp() 
+    {
+        // Start with an empty schedule
+        mySchedule = new Schedule();
+        
+        // Set up the main window
+        setTitle("PlanIt Pro");
+        setSize(600, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Use simple spacing between elements
+        setLayout(new BorderLayout(10, 10));
+        
+        // Set up all the buttons
+        buildUI();
+        
+        // Center and show
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
+    // Creates all the UI components we need
+    private void buildUI() 
+    {
+        // App name at top
+        JLabel appTitle = new JLabel("PlanIt Pro", JLabel.CENTER);
+        appTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        add(appTitle, BorderLayout.NORTH);
+        
+        // Big text area to show our events
+        eventList = new JTextArea();
+        eventList.setEditable(false);
+        JScrollPane scrollBox = new JScrollPane(eventList);
+        add(scrollBox, BorderLayout.CENTER);
+        
+        // Form for adding stuff
+        JPanel formSection = new JPanel();
+        formSection.setLayout(new GridLayout(7, 2, 5, 5));
+        
+        // Event type dropdown
+        formSection.add(new JLabel("Type:"));
+        eventType = new JComboBox<>(new String[]{"Assignment", "Meeting"});
+        formSection.add(eventType);
+        
+        // Name/title box
+        formSection.add(new JLabel("Title:"));
+        nameBox = new JTextField();
+        formSection.add(nameBox);
+        
+        // Details box
+        formSection.add(new JLabel("Description:"));
+        detailsBox = new JTextField();
+        formSection.add(detailsBox);
+        
+        // Course or location field (changes based on type)
+        formSection.add(new JLabel("Course/Location:"));
+        courseLocBox = new JTextField();
+        formSection.add(courseLocBox);
+        
+        // How important is it?
+        formSection.add(new JLabel("Priority:"));
+        importanceBox = new JComboBox<>(new String[]{"Low", "Medium", "High", "Urgent"});
+        formSection.add(importanceBox);
+        
+        // Who's coming? (for meetings)
+        formSection.add(new JLabel("Attendees:"));
+        peopleBox = new JTextField();
+        formSection.add(peopleBox);
+        
+        // Buttons at the bottom
+        JPanel buttonRow = new JPanel();
+        
+        // The big three buttons we need
+        JButton saveBtn = new JButton("Add Event");
+        saveBtn.addActionListener(e -> saveNewEvent());
+        buttonRow.add(saveBtn);
+        
+        JButton refreshBtn = new JButton("View Events");
+        refreshBtn.addActionListener(e -> refreshEventList());
+        buttonRow.add(refreshBtn);
+        
+        JButton doneBtn = new JButton("Mark Complete");
+        doneBtn.addActionListener(e -> markEventDone());
+        buttonRow.add(doneBtn);
+        
+        // Put the form and buttons together
+        JPanel bottomSection = new JPanel(new BorderLayout());
+        bottomSection.add(formSection, BorderLayout.CENTER);
+        bottomSection.add(buttonRow, BorderLayout.SOUTH);
+        
+        // Add to main window
+        add(bottomSection, BorderLayout.SOUTH);
+        
+        // Make the form adapt to what we're adding
+        eventType.addActionListener(e -> 
+        {
+            boolean isHomework = "Assignment".equals(eventType.getSelectedItem());
+            importanceBox.setEnabled(isHomework);
+            peopleBox.setEnabled(!isHomework);
+        });
+        
+        // Show initial events (if any)
+        refreshEventList();
+    }
+    
+    // Saves whatever is in the form as a new event
+    private void saveNewEvent() 
+    {
+        String title = nameBox.getText().trim();
+        if (title.isEmpty()) 
+        {
+            JOptionPane.showMessageDialog(this, "Hey, you need a title!");
+            return;
+        }
+        
+        String desc = detailsBox.getText().trim();
+        String thirdField = courseLocBox.getText().trim();
+        
+        if (thirdField.isEmpty()) 
+        {
+            JOptionPane.showMessageDialog(this, "Don't forget to fill in all fields!");
+            return;
+        }
+        
+        boolean isHomework = "Assignment".equals(eventType.getSelectedItem());
+        
+        if (isHomework) 
+        {
+            // Handle homework/assignment
+            String importanceLevel = (String) importanceBox.getSelectedItem();
+            Priority howImportant = Priority.MEDIUM; // default
+            
+            // Figure out the priority level
+            if (importanceLevel.equals("Low")) 
+            {
+                howImportant = Priority.LOW;
+            } 
+            else if (importanceLevel.equals("High")) 
+            {
+                howImportant = Priority.HIGH;
+            } 
+            else if (importanceLevel.equals("Urgent")) 
+            {
+                howImportant = Priority.URGENT;
+            }
+            
+            Assignment homework = new Assignment(title, desc, thirdField, howImportant, mySchedule.getNotificationService());
+            mySchedule.addEvent(homework);
+        } 
+        else 
+        {
+            // Handle meeting
+            Meeting meetup = new Meeting(title, desc, thirdField, mySchedule.getNotificationService());
+            
+            // Add people to the meeting
+            String peopleText = peopleBox.getText().trim();
+            if (!peopleText.isEmpty()) 
+            {
+                String[] people = peopleText.split(",");
+                for (String person : people) 
+                {
+                    String name = person.trim();
+                    if (!name.isEmpty()) 
+                    {
+                        meetup.addAttendee(name);
+                    }
+                }
+            }
+            
+            mySchedule.addEvent(meetup);
+        }
+        
+        // Clear the form
+        nameBox.setText("");
+        detailsBox.setText("");
+        courseLocBox.setText("");
+        peopleBox.setText("");
+        
+        // Show the updated list
+        refreshEventList();
+        JOptionPane.showMessageDialog(this, "Got it! Event added.");
+    }
+    
+    // Updates the display with current events
+    private void refreshEventList() 
+    {
+        ArrayList<Event> events = mySchedule.getAllEvents();
+        
+        if (events.isEmpty()) 
+        {
+            eventList.setText("Nothing on your schedule yet. Add something below!");
+            return;
+        }
+        
+        eventList.setText("");
+        
+        for (Event event : events) 
+        {
+            // Show checkmark if it's done
+            if (event.isCompleted()) 
+            {
+                eventList.append("✓ COMPLETED\n");
+            }
+            
+            // Basic info everyone needs
+            eventList.append("ID: " + event.getId() + "\n");
+            eventList.append("Title: " + event.getTitle() + "\n");
+            
+            if (event.getDescription() != null && !event.getDescription().isEmpty()) 
+            {
+                eventList.append("Description: " + event.getDescription() + "\n");
+            }
+            
+            String eventType = event.getType();
+           
+            // Different info based on type
+            if (eventType.equals("Assignment"))
+            {
+                // It's homework
+                Assignment homework = (Assignment) event;
+                eventList.append("Type: Assignment\n");
+                eventList.append("Course: " + homework.getCourse() + "\n");
+                eventList.append("Priority: " + homework.getPriority() + "\n");
+            } 
+            else if (eventType.equals("Meetings")) 
+            {
+                // It's a meeting
+                Meeting meetup = (Meeting) event;
+                eventList.append("Type: Meeting\n");
+                eventList.append("Location: " + meetup.getLocation() + "\n");
+                eventList.append("Attendees: " + meetup.getAttendeeList() + "\n");
+            }
+            
+            String status;
+            if (event.isCompleted()) 
+            {
+                status = "Completed";
+            } 
+            else 
+            {
+                status = "Pending";
+            }
+            eventList.append("Status: " + status + "\n");
+        }
+    }
+    
+    // Marks an event as finished
+    private void markEventDone() 
+    {
+        String idText = JOptionPane.showInputDialog(this, "Which event ID do you want to mark as done?");
+        if (idText == null || idText.trim().isEmpty()) return;
+        
+        try {
+            int id = Integer.parseInt(idText);
+            Event event = mySchedule.getEventById(id);
+            
+            if (event == null) 
+            {
+                JOptionPane.showMessageDialog(this, "Hmm, couldn't find that one. Check the ID?");
+                return;
+            }
+            
+            event.setCompleted(true);
+            refreshEventList();
+            JOptionPane.showMessageDialog(this, "Nice! Marked as complete.");
+        } 
+        catch (NumberFormatException e) 
+        {
+            JOptionPane.showMessageDialog(this, "That doesn't look like a number. Try again?");
+        }
+    }
+    
+    // Main method - where it all begins
+    public static void main(String[] args) {
+     
+        new ScheduleApp();
+    }
+} 

@@ -1,3 +1,6 @@
+//Author: Ishanvi Deodhar
+//Rev date: 5/15/25
+
 public enum EventStatus {
 	PENDING, 
 	IN_PROGRESS, 
@@ -7,16 +10,16 @@ public enum EventStatus {
 	public String toString()
 	{
 		switch (this) {
-        case PENDING:
-        	return "Pending";
-        case IN_PROGRESS:
-        	return "In Progress";
-        case COMPLETED:
-        	return "Completed";
-        case CANCELLED:
-        	return "Cancelled";
-        default:
-            return "Pending";
+	        case PENDING:
+	        	return "Pending";
+	        case IN_PROGRESS:
+	        	return "In Progress";
+	        case COMPLETED:
+	        	return "Completed";
+	        case CANCELLED:
+	        	return "Cancelled";
+	        default:
+	            return "Pending";
 		}
 	}
 	
