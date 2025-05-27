@@ -12,14 +12,10 @@ public enum EventStatus {
 		switch (this) {
 	        case PENDING:
 	        	return "Pending";
-	        case IN_PROGRESS:
-	        	return "In Progress";
 	        case COMPLETED:
 	        	return "Completed";
-	        case CANCELLED:
-	        	return "Cancelled";
 	        default:
-	            return "Pending";
+	            return "Unknown";
 		}
 	}
 	
