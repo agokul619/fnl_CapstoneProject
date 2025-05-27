@@ -7,6 +7,8 @@ public enum EventStatus {
 	COMPLETED, 
 	CANCELLED;
 	
+	//Returns a user-friendly string representation of the event status
+	
 	public String toString()
 	{
 		switch (this) {

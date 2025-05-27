@@ -12,17 +12,22 @@ import java.util.ArrayList;
 
 public class Meeting extends Event 
 {
+	//fields
 
     private String location;
     private ArrayList<String> attendees;
 
+    //constructor
+    
     public Meeting(String title, String description, String location, NotificationService notificationService) 
     {
         super(title, description, notificationService);
         this.location = location;
         this.attendees = new ArrayList<>();
     }
-
+    
+    //getters and setters
+    
     public String getLocation() 
     {
         return location;
@@ -38,6 +43,9 @@ public class Meeting extends Event
         attendees.add(name);
     }
 
+    //Returns a comma-separated string listing all attendees.
+    //Returns "None" if there are no attendees.
+    
     public String getAttendeeList() 
     {
         if (attendees.isEmpty()) 

@@ -28,6 +28,8 @@ public class Assignment extends Event
         this.priority = priority;
     }
 
+    //getters and setters
+    
     public String getCourse() 
     {
         return course;

@@ -13,7 +13,12 @@
 
 public abstract class Event {
 
+    // Static field to generate unique IDs
+	
     private static int nextId = 1;
+    
+    //fields
+    
     private int id;
     private String title;
     private String description;
@@ -28,6 +33,8 @@ public abstract class Event {
         this.completed = false;
         this.notificationService = notificationService;
     }
+    
+    //getters and setters
 
     public int getId() 
     {
@@ -53,11 +60,17 @@ public abstract class Event {
     {
         this.description = description;
     }
+    
+    //Checks if the event is marked as completed.
 
+    
     public boolean isCompleted() 
     {
         return completed;
     }
+    
+    //Marks the event as completed or not.
+    //Sends a notification if marked completed.
 
     public void setCompleted(boolean completed) 
     {
@@ -67,6 +80,8 @@ public abstract class Event {
             notify("Event '" + title + "' marked as completed!");
         }
     }
+    
+    //Sends a notification message using the notification service.
 
     protected void notify(String message) 
     {

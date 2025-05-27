@@ -105,14 +105,17 @@ public class ScheduleApp extends JFrame {
         JButton saveBtn = new JButton("Add Event");
         saveBtn.addActionListener(e -> saveNewEvent());
         buttonRow.add(saveBtn);
+        saveBtn.setBackground(Color.blue);
         
         JButton refreshBtn = new JButton("View Events");
         refreshBtn.addActionListener(e -> refreshEventList());
         buttonRow.add(refreshBtn);
+        refreshBtn.setBackground(Color.red);
         
         JButton doneBtn = new JButton("Mark Complete");
         doneBtn.addActionListener(e -> markEventDone());
         buttonRow.add(doneBtn);
+        doneBtn.setBackground(Color.green);
         
         // Put the form and buttons together
         JPanel bottomSection = new JPanel(new BorderLayout());
@@ -253,7 +256,7 @@ public class ScheduleApp extends JFrame {
                 eventList.append("Course: " + homework.getCourse() + "\n");
                 eventList.append("Priority: " + homework.getPriority() + "\n");
             } 
-            else if (eventType.equals("Meetings")) 
+            else if (eventType.equals("Meeting")) 
             {
                 // It's a meeting
                 Meeting meetup = (Meeting) event;

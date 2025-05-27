@@ -19,9 +19,14 @@ import java.util.ArrayList;
 
 public class Schedule 
 {
+	//fields
+	
 	private ArrayList<Event> events; //event list 
 	private NotificationService notificationService;
 
+	//constructo - makes a Schedule with an empty event list and a notification service
+
+	
 	public Schedule() 
 	{
 		events = new ArrayList<>();
@@ -37,6 +42,9 @@ public class Schedule
 		}
 	}
 
+	//Removes the event with the specified ID from the schedule.
+
+	
 	public boolean removeEvent(int id) 
 	{
 		for (int i = 0; i < events.size(); i++) 
@@ -62,6 +70,9 @@ public class Schedule
 		}
 		return null;
 	}
+	
+    //Returns the list of all events in the schedule
+
 
 	public ArrayList<Event> getAllEvents() 
 	{

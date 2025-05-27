@@ -3,9 +3,14 @@
 
 public class BasicNotification {
 
+	
+	//fields
+	
     private String message;
     private Event source;
 
+    //constructor
+    
     public BasicNotification(String message, Event source) 
     {
         this.message = message;

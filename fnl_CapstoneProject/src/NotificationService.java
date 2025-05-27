@@ -4,11 +4,15 @@
 public class NotificationService 
 {
 
+	//constructor
+	
     public NotificationService() 
     {
     	
     }
 
+    //prints the notification message
+    
     public void sendNotification(BasicNotification notification) 
     {
         System.out.println("NOTIFICATION: " + notification.getMessage());

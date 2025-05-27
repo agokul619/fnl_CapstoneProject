@@ -9,10 +9,15 @@ import java.awt.Color;
  */
 public enum Priority 
 {
+	//enum constants
+	
 	LOW,
 	MEDIUM,
 	HIGH,
 	URGENT;
+	
+    //Converts an integer value to the corresponding Priority enum
+
 
 	public static Priority fromInt(int value) 
 	{
@@ -25,6 +30,7 @@ public enum Priority
 		}
 	}
 
+	//Converts the Priority enum to its corresponding integer value.
 
 	public int toInt() 
 	{
@@ -38,6 +44,7 @@ public enum Priority
 		}
 	}
 
+	//Returns a user-friendly string representation of the priority.
 
 	public String toString() 
 	{
