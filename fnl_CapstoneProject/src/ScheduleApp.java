@@ -274,7 +274,11 @@ public class ScheduleApp extends JFrame {
             {
                 status = "Pending";
             }
-            eventList.append("Status: " + status + "\n");
+            eventList.append("Status: " + status + "\n"); 
+            
+            //add the separator
+            
+            eventList.append("------------------------\n");
         }
     }
     
