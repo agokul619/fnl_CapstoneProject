@@ -233,7 +233,7 @@ public class ScheduleApp extends JFrame {
             // Show checkmark if it's done
             if (event.isCompleted()) 
             {
-                eventList.append("✓ COMPLETED\n");
+                eventList.append("✔ COMPLETED\n");
             }
             
             // Basic info everyone needs
