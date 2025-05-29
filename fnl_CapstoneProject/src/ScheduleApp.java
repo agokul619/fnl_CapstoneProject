@@ -228,8 +228,10 @@ public class ScheduleApp extends JFrame {
         
         eventList.setText("");
         
-        for (Event event : events) 
+        for (int i = 0; i < events.size(); i++) 
         {
+        	Event event = events.get(i);
+
             // Show checkmark if it's done
             if (event.isCompleted()) 
             {
@@ -252,7 +254,7 @@ public class ScheduleApp extends JFrame {
             {
                 // It's homework
                 Assignment homework = (Assignment) event;
-                eventList.append("Type: Assignment\n");
+                eventList.append("Type: Assignment 📚\n");
                 eventList.append("Course: " + homework.getCourse() + "\n");
                 eventList.append("Priority: " + homework.getPriority() + "\n");
             } 
@@ -260,7 +262,7 @@ public class ScheduleApp extends JFrame {
             {
                 // It's a meeting
                 Meeting meetup = (Meeting) event;
-                eventList.append("Type: Meeting\n");
+                eventList.append("Type: Meeting 📝📅👥💼 \n ");
                 eventList.append("Location: " + meetup.getLocation() + "\n");
                 eventList.append("Attendees: " + meetup.getAttendeeList() + "\n");
             }
