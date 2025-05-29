@@ -28,6 +28,7 @@ public class ScheduleApp extends JFrame {
     private JTextField peopleBox;
     private JComboBox<String> importanceBox;
     
+    
     // Constructor - sets up our window
     public ScheduleApp() 
     {
@@ -98,6 +99,10 @@ public class ScheduleApp extends JFrame {
         peopleBox = new JTextField();
         formSection.add(peopleBox);
         
+        //set initial field states
+        importanceBox.setEnabled(true);
+        peopleBox.setEnabled(false);
+        
         // Buttons at the bottom
         JPanel buttonRow = new JPanel();
         
@@ -105,12 +110,7 @@ public class ScheduleApp extends JFrame {
         JButton saveBtn = new JButton("Add Event");
         saveBtn.addActionListener(e -> saveNewEvent());
         buttonRow.add(saveBtn);
-        saveBtn.setBackground(Color.blue);
-        
-        JButton refreshBtn = new JButton("View Events");
-        refreshBtn.addActionListener(e -> refreshEventList());
-        buttonRow.add(refreshBtn);
-        refreshBtn.setBackground(Color.red);
+        saveBtn.setBackground(Color.CYAN);
         
         JButton doneBtn = new JButton("Mark Complete");
         doneBtn.addActionListener(e -> markEventDone());
